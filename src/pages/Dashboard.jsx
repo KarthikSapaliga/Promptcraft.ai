@@ -4,6 +4,7 @@ import TopBar from "@/components/Topbar";
 import Sidebar from "@/components/Sidebar";
 
 import Welcome from "@/components/Welcome";
+import ArticleGenerator from "@/components/ArticleGenerator";
 
 function Dashboard() {
     const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -14,7 +15,7 @@ function Dashboard() {
             case "welcome":
                 return <Welcome />;
             case "write-article":
-                return <div><h1 className="text-2xl font-bold">Write Article</h1></div>;
+                return <ArticleGenerator />;
             case "blog-titles":
                 return <div><h1 className="text-2xl font-bold">Blog Titles</h1></div>;
             case "gen-images":
