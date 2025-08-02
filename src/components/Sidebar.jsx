@@ -17,7 +17,7 @@ export default function Sidebar({ activeSection, setActiveSection }) {
   }
 
   return (
-    <aside className="w-64 shrink-0 h-full border-r bg-background text-foreground p-4 space-y-6">
+    <aside className="absolute top-0 left-0 md:relative w-64 shrink-0 h-full border-r bg-background text-foreground p-4 space-y-6">
       <div>
         <h2 className="text-xs font-semibold text-muted-foreground uppercase mb-2">Overview</h2>
         <nav className="flex flex-col gap-1">
