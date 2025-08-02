@@ -18,37 +18,37 @@ const features = [
     {
         icon: PenTool,
         title: "AI Article Writer",
-        description: "Generate high-quality, engaging articles on any topic with our AI writing technology.",
+        description: "Craft compelling, informative articles instantly with our intelligent AI writing assistant.",
         color: "bg-blue-500",
     },
     {
         icon: Hash,
         title: "Blog Title Generator",
-        description: "Generate high-quality, engaging articles on any topic with our AI writing technology.",
+        description: "Create attention-grabbing, SEO-friendly blog titles tailored to your content instantly.",
         color: "bg-purple-500",
     },
     {
         icon: ImageIcon,
         title: "AI Image Generation",
-        description: "Generate high-quality, engaging articles on any topic with our AI writing technology.",
+        description: "Turn your ideas into stunning visuals using advanced generative AI image modeling.",
         color: "bg-green-500",
     },
     {
         icon: Eraser,
         title: "Background Removal",
-        description: "Generate high-quality, engaging articles on any topic with our AI writing technology.",
+        description: "Easily remove backgrounds from images while preserving quality and subject clarity.",
         color: "bg-red-500",
     },
     {
         icon: FileMinus,
         title: "Object Removal",
-        description: "Generate high-quality, engaging articles on any topic with our AI writing technology.",
+        description: "Erase unwanted elements from images seamlessly with intelligent AI cleanup tools.",
         color: "bg-blue-400",
     },
     {
         icon: FileText,
         title: "Resume Review",
-        description: "Generate high-quality, engaging articles on any topic with our AI writing technology.",
+        description: "Get instant feedback and optimization tips to improve your resume's impact.",
         color: "bg-teal-500",
     },
 ];
@@ -57,8 +57,8 @@ export default function Home() {
     const { theme, toggleTheme } = useTheme();
     const navigate = useNavigate();
 
-    const moveToDashboard = () =>{
-        navigate("/dashboard");
+    const moveToDashboard = () => {
+        navigate("/ai");
     }
 
     return (
@@ -73,7 +73,17 @@ export default function Home() {
 
             <div className="relative z-10 flex flex-col h-screen">
                 <header className="flex items-center justify-between px-6 py-6">
-                    <h1 className="text-3xl font-extrabold text-indigo-700 dark:text-indigo-400 tracking-tight">Quick.ai</h1>
+                    <div className="h-full flex gap-4 items-center">
+                        <img
+                            src="/logo.png"
+                            alt="PromptCraft.ai"
+                            className="h-8 max-h-full w-auto object-contain"
+                            />
+                            <h1 className="text-3xl font-semibold text-gray-700 dark:text-gray-300">
+                                Promptcraft
+                                <span className="text-primary">.ai</span>
+                            </h1>
+                    </div>
                     <Button
                         variant="ghost"
                         size="icon"
@@ -120,7 +130,7 @@ export default function Home() {
             </section>
 
             <footer className="relative z-10 text-center py-6 border-t bg-card px-4">
-                &copy; 2025 Quick.ai. Built to empower your creative journey.
+                &copy; 2025 PromptCraft.ai. Built to empower your creative journey.
             </footer>
         </div>
     );
