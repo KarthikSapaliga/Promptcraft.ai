@@ -63,7 +63,7 @@ export default function ArticleGenerator() {
 			</Card>
 
 			<Card>
-				<CardContent className="py-6 space-y-4 overflow-auto max-h-[600px]">
+				<CardContent className="py-6 space-y-4 min-h-[600px]">
 					<h2 className="text-lg font-semibold">Generated Article</h2>
 					{article ? (
 						<div className="disable-tailwind">
