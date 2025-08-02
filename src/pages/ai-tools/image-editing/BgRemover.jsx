@@ -2,22 +2,37 @@ import { useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
-import { Eraser } from "lucide-react"
+import { Eraser, Loader2 } from "lucide-react"
+
+import { removeBg } from "@/lib/ai-controller"
 
 export default function BgRemover() {
   const [imageFile, setImageFile] = useState(null)
   const [processedImage, setProcessedImage] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleFileChange = (e) => {
     const file = e.target.files?.[0]
     if (file) {
       setImageFile(file)
-      setProcessedImage("") 
+      setProcessedImage("")
     }
   }
 
-  const handleRemoveBackground = () => {
+  const handleRemoveBackground = async () => {
     if (!imageFile) return
+    setIsLoading(true);
+
+    const buffer = await imageFile.arrayBuffer();
+
+    try {
+      const image = await removeBg(buffer);
+      setProcessedImage(image)
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
@@ -45,9 +60,9 @@ export default function BgRemover() {
           <Button
             className="w-full bg-primary text-primary-foreground"
             onClick={handleRemoveBackground}
-            disabled={!imageFile}
+            disabled={!imageFile || isLoading}
           >
-            <Eraser className="w-4 h-4 mr-2" />
+            {isLoading ? <Loader2 className="animate-spin w-4 h-4 mr-2" /> : <Eraser className="w-4 h-4 mr-2" />}
             Remove background
           </Button>
         </CardContent>
@@ -59,12 +74,29 @@ export default function BgRemover() {
             Processed Image
           </h2>
 
-          {processedImage ? (
-            <img
-              src={processedImage}
-              alt="Processed"
-              className="max-w-sm rounded-md shadow"
-            />
+          {isLoading ? (
+            <div className="flex items-center justify-center min-h-40">
+              <Loader2 className="animate-spin w-6 h-6 text-muted-foreground" />
+              <span className="ml-2 text-muted-foreground">Generating article...</span>
+            </div>
+          ) : processedImage ? (
+            <div className="flex flex-col items-center gap-4 w-full">
+              <img
+                src={processedImage}
+                alt="Processed"
+                className="max-w-sm rounded-md shadow"
+              />
+              <a
+                href={processedImage}
+                download="background-removed.png"
+                className="w-full md:w-auto"
+              >
+                <Button className="w-full bg-primary text-primary-foreground">
+                  Download Image
+                </Button>
+              </a>
+            </div>
+
           ) : (
             <div className="text-center text-muted-foreground flex flex-col items-center justify-center h-60 gap-2">
               <Eraser className="w-8 h-8 opacity-30" />
