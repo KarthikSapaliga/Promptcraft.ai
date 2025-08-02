@@ -3,7 +3,9 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { ImageIcon } from "lucide-react"
+import { ImageIcon, Loader2 } from "lucide-react"
+
+import { generateImage } from "@/lib/ai-controller"
 
 const styles = [
   "Realistic",
@@ -20,10 +22,21 @@ export default function ImageGenerator() {
   const [description, setDescription] = useState("")
   const [selectedStyle, setSelectedStyle] = useState("Realistic")
   const [generatedImage, setGeneratedImage] = useState("")
+	const [isLoading, setIsLoading] = useState(false)
 
-  const handleGenerate = () => {
-    if(!description) return;
-    setGeneratedImage("https://placehold.co/600x400/slategrey/white")
+  const handleGenerate = async () => {
+    if (!description) return;
+
+    setIsLoading(true);
+
+    try {
+      const image = await generateImage(description, selectedStyle);
+      setGeneratedImage(image)
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
@@ -62,7 +75,9 @@ export default function ImageGenerator() {
           <Button
             className="w-full bg-primary text-primary-foreground"
             onClick={handleGenerate}
+            disabled={!description || isLoading}
           >
+            {isLoading && <Loader2 className="animate-spin w-4 h-4 mr-2" />}
             Generate Image
           </Button>
         </CardContent>
@@ -74,7 +89,12 @@ export default function ImageGenerator() {
             Generated image
           </h2>
 
-          {generatedImage ? (
+          {isLoading ? (
+            <div className="flex items-center justify-center min-h-40">
+              <Loader2 className="animate-spin w-6 h-6 text-muted-foreground" />
+              <span className="ml-2 text-muted-foreground">Generating article...</span>
+            </div>
+          ) : generatedImage ? (
             <img
               src={generatedImage}
               alt="Generated"
