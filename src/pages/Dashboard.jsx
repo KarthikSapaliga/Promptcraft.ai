@@ -9,6 +9,7 @@ import TitleGenerator from "@/pages/ai-tools/content-generation/TitleGenerator";
 import ImageGenerator from "@/pages/ai-tools/content-generation/ImageGenerator";
 import BgRemover from "@/pages/ai-tools/image-editing/BgRemover";
 import ObjectRemover from "@/pages/ai-tools/image-editing/ObjectRemover";
+import ResumeReviewer from "@/pages/ai-tools/career/ResumeReviewer";
 
 function Dashboard() {
     const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -29,7 +30,7 @@ function Dashboard() {
             case "remove-object":
                 return <ObjectRemover />;
             case "review-resume":
-                return <div><h1 className="text-2xl font-bold">Review Resume</h1></div>;
+                return <ResumeReviewer />;
             default:
                 return <div><h1>Unknown Section</h1></div>;
         }
