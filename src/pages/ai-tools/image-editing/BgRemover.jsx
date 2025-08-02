@@ -77,7 +77,7 @@ export default function BgRemover() {
           {isLoading ? (
             <div className="flex items-center justify-center min-h-40">
               <Loader2 className="animate-spin w-6 h-6 text-muted-foreground" />
-              <span className="ml-2 text-muted-foreground">Generating article...</span>
+              <span className="ml-2 text-muted-foreground">Removing the background...</span>
             </div>
           ) : processedImage ? (
             <div className="flex flex-col items-center gap-4 w-full">

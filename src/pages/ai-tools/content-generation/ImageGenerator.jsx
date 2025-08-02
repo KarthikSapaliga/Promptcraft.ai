@@ -92,7 +92,7 @@ export default function ImageGenerator() {
           {isLoading ? (
             <div className="flex items-center justify-center min-h-40">
               <Loader2 className="animate-spin w-6 h-6 text-muted-foreground" />
-              <span className="ml-2 text-muted-foreground">Generating article...</span>
+              <span className="ml-2 text-muted-foreground">Generating Image...</span>
             </div>
           ) : generatedImage ? (
             <img
