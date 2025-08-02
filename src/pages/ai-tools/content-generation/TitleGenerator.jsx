@@ -2,9 +2,11 @@ import { useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { Hash } from "lucide-react"
+import { Hash, Loader2 } from "lucide-react"
+import Markdown from "react-markdown"
+import remarkGfm from "remark-gfm";
 
-import { dummyTitles } from "@/lib/dummyData/dummy-titles"
+import { generateTitles } from "@/lib/ai-controller"
 
 const categories = [
   "General",
@@ -21,10 +23,20 @@ export default function TitleGenerator() {
   const [keyword, setKeyword] = useState("")
   const [selectedCategory, setSelectedCategory] = useState("General")
   const [generatedTitles, setGeneratedTitles] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
 
-  const handleGenerate = () => {
+  const handleGenerate = async () => {
     if (!keyword) return;
-    setGeneratedTitles(dummyTitles);
+    setIsLoading(true);
+
+    try {
+      const titles = await generateTitles(keyword, selectedCategory);
+      setGeneratedTitles(titles)
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
@@ -55,7 +67,9 @@ export default function TitleGenerator() {
           <Button
             className="w-full bg-primary text-white"
             onClick={handleGenerate}
+            disabled={!keyword || isLoading}
           >
+            {isLoading && <Loader2 className="animate-spin w-4 h-4 mr-2" />}
             Generate title
           </Button>
         </CardContent>
@@ -67,17 +81,20 @@ export default function TitleGenerator() {
             Generated titles
           </h2>
 
-          {generatedTitles.length === 0 ? (
+          {isLoading ? (
+            <div className="flex items-center justify-center min-h-40">
+              <Loader2 className="animate-spin w-6 h-6 text-muted-foreground" />
+              <span className="ml-2 text-muted-foreground">Generating titles...</span>
+            </div>
+          ) : generatedTitles.length === 0 ? (
             <div className="text-center text-muted-foreground flex flex-col items-center justify-center h-60 gap-2">
               <Hash className="w-8 h-8 opacity-30" />
               <p>Enter a topic and click "Generate title" to get started</p>
             </div>
           ) : (
-            <ul className="space-y-2 list-disc list-inside">
-              {generatedTitles.map((title, idx) => (
-                <li key={idx} className="text-sm">{title}</li>
-              ))}
-            </ul>
+            <div className="disable-tailwind">
+              <Markdown remarkPlugins={[remarkGfm]}>{generatedTitles}</Markdown>
+            </div>
           )}
         </CardContent>
       </Card>
