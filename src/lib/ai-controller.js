@@ -1,18 +1,17 @@
-import OpenAI from "openai"
+import { GoogleGenAI } from "@google/genai";
 
-const ai = new OpenAI({
-    baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/",
+const ai = new GoogleGenAI({
     apiKey: import.meta.env.VITE_GEMINI_API_KEY,
-})
+});
 
-export const generateArticle = async () => {} 
+export const generateArticle = async () => {};
 
-export const generateTitles = async () => {} 
+export const generateTitles = async () => {};
 
-export const generateImage = async () => {} 
+export const generateImage = async () => {};
 
-export const removeBg = async () => {} 
+export const removeBg = async () => {};
 
-export const removeObject = async () => {} 
+export const removeObject = async () => {};
 
-export const analyzeResume = async () => {} 
+export const analyzeResume = async () => {};
