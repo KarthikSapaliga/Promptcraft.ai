@@ -6,6 +6,7 @@ import Sidebar from "@/components/Sidebar";
 import Welcome from "@/components/Welcome";
 import ArticleGenerator from "@/pages/ai-tools/content-generation/ArticleGenerator";
 import TitleGenerator from "@/pages/ai-tools/content-generation/TitleGenerator";
+import ImageGenerator from "@/pages/ai-tools/content-generation/ImageGenerator";
 
 function Dashboard() {
     const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -20,7 +21,7 @@ function Dashboard() {
             case "blog-titles":
                 return <TitleGenerator />;
             case "gen-images":
-                return <div><h1 className="text-2xl font-bold">Generate Images</h1></div>;
+                return <ImageGenerator />;
             case "remove-bg":
                 return <div><h1 className="text-2xl font-bold">Remove Background</h1></div>;
             case "remove-object":
