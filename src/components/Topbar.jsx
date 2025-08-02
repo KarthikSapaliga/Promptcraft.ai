@@ -15,7 +15,17 @@ export default function TopBar({ onSidebarToggle }) {
                 >
                     <Menu />
                 </Button>
-                <span className="text-lg font-semibold text-foreground">Quick.ai</span>
+                <div className="h-full flex gap-2 items-center">
+                    <img
+                        src="/logo.png"
+                        alt="PromptCraft.ai"
+                        className="h-6 max-h-full w-auto object-contain"
+                    />
+                    <h1 className="text-xl font-semibold text-gray-700 dark:text-gray-300">
+                        Promptcraft
+                        <span className="text-primary">.ai</span>
+                    </h1>
+                </div>
             </div>
 
             <Button
