@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 
 import Home from './pages/Home'
 import Dashboard from './pages/Dashboard'
@@ -9,7 +10,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route  path='/' element={<Home />} />
-        <Route  path='/dashboard' element={<Dashboard />} />
+        <Route  path='/ai' element={<Dashboard />} />
+        <Route  path='*' element={<Navigate to="/ai"/>} />
       </Routes>
     </BrowserRouter>
   )
