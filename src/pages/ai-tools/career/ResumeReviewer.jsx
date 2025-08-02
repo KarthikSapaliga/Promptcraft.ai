@@ -78,15 +78,6 @@ export default function ResumeReviewer() {
               Supports PDF resume only.
             </p>
           </div>
-
-          <Button
-            className="w-full bg-primary text-primary-foreground"
-            onClick={handleReview}
-            disabled={!resumeFile | isLoading}
-          >
-            {isLoading ? <Loader2 className="animate-spin w-4 h-4 mr-2" /> : <FileText className="w-4 h-4 mr-2" />}
-            Review Resume
-          </Button>
         </CardContent>
       </Card>
 

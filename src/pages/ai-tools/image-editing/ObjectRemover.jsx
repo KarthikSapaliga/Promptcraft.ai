@@ -40,7 +40,7 @@ export default function ObjectRemover() {
 
 	return (
 		<div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 min-h-[80vh]">
-			<Card>
+			<Card className="max-h-max">
 				<CardContent className="space-y-6 py-6">
 					<h2 className="text-lg font-semibold">Object Removal</h2>
 
@@ -82,7 +82,7 @@ export default function ObjectRemover() {
 				</CardContent>
 			</Card>
 
-			<Card className="w-full">
+			<Card className="w-full max-h-max">
 				<CardContent className="py-6 space-y-4">
 					<h2 className="text-lg font-semibold flex items-center gap-2">
 						Processed Image
