@@ -4,7 +4,8 @@ import TopBar from "@/components/Topbar";
 import Sidebar from "@/components/Sidebar";
 
 import Welcome from "@/components/Welcome";
-import ArticleGenerator from "@/components/ArticleGenerator";
+import ArticleGenerator from "@/pages/ai-components/ArticleGenerator";
+import TitleGenerator from "./ai-components/TitleGenerator";
 
 function Dashboard() {
     const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -17,7 +18,7 @@ function Dashboard() {
             case "write-article":
                 return <ArticleGenerator />;
             case "blog-titles":
-                return <div><h1 className="text-2xl font-bold">Blog Titles</h1></div>;
+                return <TitleGenerator />;
             case "gen-images":
                 return <div><h1 className="text-2xl font-bold">Generate Images</h1></div>;
             case "remove-bg":
