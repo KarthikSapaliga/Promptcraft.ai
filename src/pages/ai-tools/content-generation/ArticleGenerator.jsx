@@ -2,10 +2,11 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent } from "@/components/ui/card"
+import { PencilLine,Loader2 } from "lucide-react"
+
 import { useState } from "react"
 import Markdown from "react-markdown"
 import remarkGfm from "remark-gfm";
-import { Loader2 } from "lucide-react" 
 
 import { generateArticle } from "@/lib/ai-controller"
 
@@ -16,24 +17,25 @@ export default function ArticleGenerator() {
 	const [isLoading, setIsLoading] = useState(false)
 
 	const generateArticleHandler = async () => {
+		if(!topic) return;
+
 		setIsLoading(true);
 		setArticle("");
 
 		var articleLength = '100';
-		switch(length){
+		switch (length) {
 			case "short": articleLength = "500-800"; break;
-			case "medium" : articleLength = "800-1200"; break;
+			case "medium": articleLength = "800-1200"; break;
 			case "long": articleLength = "1200+"; break;
 		}
 
-		const prompt = `Generate a article on ${topic} in about ${articleLength} words.`;
-		try{
-			const article = await generateArticle(prompt);
+		try {
+			const article = await generateArticle(topic, articleLength);
 			console.log(article)
 			setArticle(article)
-		}catch(err){
+		} catch (err) {
 			console.log(err);
-		}finally{
+		} finally {
 			setIsLoading(false);
 		}
 	}
@@ -42,7 +44,7 @@ export default function ArticleGenerator() {
 		<div className="flex flex-col gap-6 p-6">
 			<Card>
 				<CardContent className="space-y-4 py-6">
-					<h2 className="text-lg font-semibold">Article Configuration</h2>
+					<h2 className="text-lg font-semibold">AI Article Generator</h2>
 					<div className="space-y-2">
 						<Label htmlFor="topic">Article Topic</Label>
 						<div className="flex items-center gap-6">
@@ -52,7 +54,7 @@ export default function ArticleGenerator() {
 								value={topic}
 								onChange={(e) => setTopic(e.target.value)}
 							/>
-							<Button onClick={generateArticleHandler} disabled={isLoading}>
+							<Button onClick={generateArticleHandler} disabled={!topic || isLoading}>
 								{isLoading && <Loader2 className="animate-spin w-4 h-4 mr-2" />}
 								Generate article
 							</Button>
@@ -93,12 +95,15 @@ export default function ArticleGenerator() {
 							<Loader2 className="animate-spin w-6 h-6 text-muted-foreground" />
 							<span className="ml-2 text-muted-foreground">Generating article...</span>
 						</div>
-					): article ? (
+					) : article ? (
 						<div className="disable-tailwind">
 							<Markdown remarkPlugins={[remarkGfm]}>{article}</Markdown>
 						</div>
 					) : (
-						<p className="text-muted-foreground">Your generated article will appear here.</p>
+						<div className="text-center text-muted-foreground flex flex-col items-center justify-center h-60 gap-2">
+							<PencilLine className="w-8 h-8 opacity-30" />
+							<p>Enter a topic and click "Generate article" to get started</p>
+						</div>
 					)}
 				</CardContent>
 			</Card>
