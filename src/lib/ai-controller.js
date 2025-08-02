@@ -1,11 +1,20 @@
 import { GoogleGenAI } from "@google/genai";
 
+import {
+    getArticleGenPrompt,
+    getTitleGenPrompt,
+    getImageGenPrompt,
+    getBgRemovalPrompt,
+    getObjectRemovalPrompt,
+    getResumeReviewPrompt,
+} from "./prompts.js";
+
 const ai = new GoogleGenAI({
     apiKey: import.meta.env.VITE_GEMINI_API_KEY,
 });
 
 export const generateArticle = async (topic, articleLength) => {
-	const prompt = `Generate a article on ${topic} in about ${articleLength} words.`;
+    const prompt = getArticleGenPrompt(topic, articleLength);
 
     try {
         const response = await ai.models.generateContent({
@@ -13,7 +22,7 @@ export const generateArticle = async (topic, articleLength) => {
             contents: prompt,
         });
 
-        const article = response?.text; 
+        const article = response?.text;
         return article;
     } catch (err) {
         console.error("Error generating article:", err);
