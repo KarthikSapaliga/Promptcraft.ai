@@ -133,4 +133,17 @@ export const removeObject = async (imageBuffer, desc) => {
     }
 };
 
-export const analyzeResume = async () => {};
+export const analyzeResume = async (pdfBuffer) => {
+    const base64PDF = arrayBufferToBase64(pdfBuffer);
+    const prompt = getResumeReviewPrompt();
+
+    const response = await ai.models.generateContent({
+        model: "gemini-2.5-flash",
+        contents: [
+            { text: prompt },
+            { inlineData: { mimeType: "application/pdf", data: base64PDF } },
+        ],
+    });
+
+    return response.text;
+};
