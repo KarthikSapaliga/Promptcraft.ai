@@ -30,7 +30,22 @@ export const generateArticle = async (topic, articleLength) => {
     }
 };
 
-export const generateTitles = async () => {};
+export const generateTitles = async (topic, category) => {
+    const prompt = getTitleGenPrompt(topic, category);
+
+    try {
+        const response = await ai.models.generateContent({
+            model: "gemini-2.0-flash",
+            contents: prompt,
+        });
+
+        const article = response?.text;
+        return article;
+    } catch (err) {
+        console.error("Error generating titles:", err);
+        throw err;
+    }
+};
 
 export const generateImage = async () => {};
 
