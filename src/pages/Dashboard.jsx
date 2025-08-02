@@ -39,7 +39,7 @@ function Dashboard() {
     return (
         <section className="w-screen h-screen flex flex-col overflow-hidden">
             <TopBar onSidebarToggle={() => setSidebarOpen((prev) => !prev)} />
-            <div className="flex flex-1 overflow-hidden">
+            <div className="flex flex-1 overflow-hidden relative">
                 {sidebarOpen && (
                     <Sidebar activeSection={activeSection} setActiveSection={setActiveSection} />
                 )}
