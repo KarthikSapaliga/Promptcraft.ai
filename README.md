@@ -11,7 +11,6 @@ Promptcraft.ai is an all-in-one AI toolkit designed to help you create, refine, 
 - **Object Removal** – Erase unwanted objects from images effortlessly.
 - **Resume Review** – Get real-time feedback and suggestions to optimize your resume.
 
----
 
 ## 🚀 Tech Stack
 
@@ -19,7 +18,6 @@ Promptcraft.ai is an all-in-one AI toolkit designed to help you create, refine, 
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/), [ShadCN UI](https://ui.shadcn.com/)
 - **AI API**: [Gemini API](https://ai.google.dev/)
 
----
 
 ## 🛠️ Getting Started
 
@@ -56,11 +54,8 @@ npm run dev
 
 The app will be available at `http://localhost:5173`
 
----
 
 
 ## 🤝 Contributing
 
 Contributions are welcome! Feel free to submit a pull request or open an issue.
-
----
