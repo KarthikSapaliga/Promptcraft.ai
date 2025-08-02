@@ -4,8 +4,8 @@ import TopBar from "@/components/Topbar";
 import Sidebar from "@/components/Sidebar";
 
 import Welcome from "@/components/Welcome";
-import ArticleGenerator from "@/pages/ai-components/ArticleGenerator";
-import TitleGenerator from "./ai-components/TitleGenerator";
+import ArticleGenerator from "@/pages/ai-tools/content-generation/ArticleGenerator";
+import TitleGenerator from "@/pages/ai-tools/content-generation/TitleGenerator";
 
 function Dashboard() {
     const [sidebarOpen, setSidebarOpen] = useState(true);
